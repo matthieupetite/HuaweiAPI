@@ -512,6 +512,7 @@ namespace HuaweiAPI
                 logout = HuaweiAPI.Tools.POST(ip_address, data, "api/user/logout");
 
                 if (XMLTool.Beautify(logout).Contains("OK"))
+
                     return true;
                 else
                     return false;
@@ -548,6 +549,9 @@ namespace HuaweiAPI
 
                 XmlDocument shutdown;
                 shutdown = HuaweiAPI.Tools.POST(ip_address, data, "api/device/control");
+
+                HuaweiAPI.Tools._requestToken = String.Empty;
+                HuaweiAPI.Tools._sessionCookie = String.Empty;
 
                 if (XMLTool.Beautify(shutdown).Contains("OK"))
                     return true;
