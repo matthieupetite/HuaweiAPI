@@ -693,7 +693,8 @@ namespace HuaweiAPI
                 string data = @"<request><Index>-1</Index><Phones><Phone>"+phoneNumber+"</Phone></Phones><Sca></Sca><Content>" + message + "</Content><Length>" + message.Length.ToString() + "</Length><Reserved>1</Reserved><Date>" + DateTime.Now.ToUniversalTime().ToString("yyyy-MM-dd HH:mm:ss") + "</Date></request>";
                 XmlDocument smsResult;
                 smsResult = HuaweiAPI.Tools.POST(ip_address, data, "api/sms/send-sms");
-                if (XMLTool.Beautify(smsResult).Contains("OK"))
+                // 113004 means message sent successfully (that code says huawei's api saw a duplicate message and it was ignored, we consider it as success)
+                if (XMLTool.Beautify(smsResult).Contains("OK") || XMLTool.Beautify(smsResult).Contains("113004") )
                     return true;
                 else
                     return false;

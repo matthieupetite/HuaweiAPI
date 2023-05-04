@@ -60,6 +60,12 @@ namespace Sample
 </request>";
             HuaweiAPI.HuaweiAPI.Tools.POST(ip, data, "api/language/current-language");
 
+
+            var result = HuaweiAPI.HuaweiAPI.Api.SendSms(ip, "test", "0645796252");
+            result = HuaweiAPI.HuaweiAPI.Api.SendSms(ip, "test", "0645796252");
+            result = HuaweiAPI.HuaweiAPI.Api.SendSms(ip, "test", "0645796252");
+            result = HuaweiAPI.HuaweiAPI.Api.SendSms(ip, "test", "0645796252");
+            result = HuaweiAPI.HuaweiAPI.Api.SendSms(ip, "test", "0645796252");
             HuaweiAPI.HuaweiAPI.Api.UserLogout(ip, username, password);
             
         }  
