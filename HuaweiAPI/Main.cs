@@ -442,11 +442,12 @@ namespace HuaweiAPI
             private static void Initialise(string ip_address)
             {
 
-                if (string.IsNullOrEmpty(HuaweiAPI.Tools._sessionCookie) || string.IsNullOrEmpty(HuaweiAPI.Tools._requestToken))
-                {
-
                     try
                     {
+                        if (HuaweiAPI.Tools._requestToken != "" && HuaweiAPI.Tools._sessionCookie != "")
+                        {
+                            return;
+                        }
                         XmlDocument GetTokens_doc = HuaweiAPI.Tools.GET_internal(ip_address, "api/webserver/SesTokInfo");
                         HuaweiAPI.Tools._sessionID = GetTokens_doc.SelectSingleNode("//response/SesInfo").InnerText;
                         HuaweiAPI.Tools._token = GetTokens_doc.SelectSingleNode("//response/TokInfo").InnerText;
@@ -457,7 +458,7 @@ namespace HuaweiAPI
                     catch
                     {
                     }
-                }
+
             }
 
             /// <summary>
@@ -511,11 +512,15 @@ namespace HuaweiAPI
                 XmlDocument logout;
                 logout = HuaweiAPI.Tools.POST(ip_address, data, "api/user/logout");
 
-                if (XMLTool.Beautify(logout).Contains("OK"))
+                if (XMLTool.Beautify(logout).Contains("OK")){ 
 
+                    HuaweiAPI.Tools._requestToken = "";
+                    HuaweiAPI.Tools._sessionCookie = "";
                     return true;
-                else
+                }
+                else {    
                     return false;
+                }
             }
 
             /// <summary>

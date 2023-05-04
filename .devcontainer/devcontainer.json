@@ -1,0 +1,29 @@
+{
+    "name": ".net dev container",
+    "build": {
+        "dockerfile": "Dockerfile",
+        "context": "."
+        // Update 'VARIANT' to pick a Node version: 12, 14, 16
+    },
+    "workspaceFolder": "/home/vscode/app",
+    "workspaceMount": "source=${localWorkspaceFolder},target=/home/vscode/app,type=bind,consistency=delegated",
+    "appPort": [],
+    "extensions": [
+		"trottero.dotnetwatchattach",
+		"ms-dotnettools.csharp",
+		"ms-dotnettools.vscode-dotnet-runtime",
+		"fernandoescolar.vscode-solution-explorer",
+		"eamodio.gitlens",
+		"ckolkman.vscode-postgres",
+		"github.copilot",
+		"GitHub.vscode-pull-request-github",
+		"trottero.dotnetwatchattach",
+		"github.vscode-github-actions"
+	],
+    "runArgs": [
+        "--add-host=sms.antyda.com:172.18.0.3"
+    ],
+    "postCreateCommand": "bash /home/vscode/app/.devcontainer/postCreateCommand.sh",
+    "forwardPorts": [],
+    "remoteUser": "vscode"
+}
